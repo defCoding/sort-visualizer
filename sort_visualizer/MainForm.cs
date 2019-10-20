@@ -41,7 +41,8 @@ namespace sort_visualizer
             Bubble,
             Selection,
             Quick,
-            Merge
+            Merge,
+            Radix
         }
         public MainForm()
         {
@@ -176,6 +177,9 @@ namespace sort_visualizer
                             case Sorts.Merge:
                                 sorterModel.mergeSort();
                                 break;
+                            case Sorts.Radix:
+                                sorterModel.radixSort();
+                                break;
                             default:
                                 break; // Should never get here.
                         }
@@ -212,6 +216,11 @@ namespace sort_visualizer
         private void btnSelectionSort_Click(object sender, EventArgs e)
         {
             runSort(Sorts.Selection);
+        }
+
+        private void btnRadixSort_Click(object sender, EventArgs e)
+        {
+            runSort(Sorts.Radix);
         }
 
         /// <summary>

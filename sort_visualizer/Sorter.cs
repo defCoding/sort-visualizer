@@ -206,14 +206,90 @@ namespace sort_visualizer
         {
             for (int i = 0; i < array.Length; i++)
             {
-                int minIndex = findMin(i);
+                int minIndex = findMinIndex(i);
                 swap(minIndex, i);
                 OnArrayModified(i, minIndex);
             }
             OnArrayModified(0, 0);
         }
 
-        private int findMin(int start)
+        public void radixSort()
+        {
+            int maxValue = findMaxValue();
+            int degree = 0;
+            while (maxValue >= 10)
+            {
+                maxValue /= 10;
+                degree++;
+            }
+            radixSortHelper(0, array.Length - 1, degree);
+            OnArrayModified(0, 0);
+        }
+
+        private void radixSortHelper(int start, int end, int degree)
+        {
+            if (start > end || degree < 0)
+            {
+                return;
+            }
+
+            int[] count = new int[10];
+            count[0] = start;
+
+            int i;
+            for (i = start; i <= end; i++)
+            {
+                int digit = getDigit(array[i], degree);
+                OnArrayModified(i, i);
+                count[digit]++;
+            }
+
+            for (i = 1; i < count.Length; i++)
+            {
+                count[i] += count[i - 1];
+            }
+
+
+            i = start;
+            while (i <= end)
+            {
+                int digit = getDigit(array[i], degree);
+                int boundaryStart = digit == 0 ? -1 : count[digit - 1];
+
+                if (i < boundaryStart)
+                {
+                    OnArrayModified(i, count[digit] - 1);
+                    swap(i, count[digit] - 1);
+                    count[digit]--;
+                } else
+                {
+                    OnArrayModified(i, i);
+                    i++;
+                }
+            }
+
+            i = start;
+            while (i <= end)
+            {
+                int currentDigit = getDigit(array[i], degree);
+                int j = i + 1;
+
+                while (j <= end && currentDigit == getDigit(array[j], degree))
+                {
+                    j++;
+                }
+                radixSortHelper(i, j - 1, degree - 1);
+                i = j;
+            }
+
+        }
+
+        /// <summary>
+        /// Gets the index of the smallest value in <c>array</c> starting from a given index.
+        /// </summary>
+        /// <param name="start">The index to begin the search from.</param>
+        /// <returns>The index of the smallest value from <c>start</c> onwards in <c>array</c></returns>
+        private int findMinIndex(int start)
         {
             int minIndex = start;
             for (int i = start + 1; i < array.Length; i++)
@@ -227,6 +303,43 @@ namespace sort_visualizer
             return minIndex;
         }
 
+        /// <summary>
+        /// Gets the value of the largest number in <c>array</c>.
+        /// </summary>
+        /// <returns>The largest value in <c>array</c>.</returns>
+        private int findMaxValue()
+        {
+            int maxValue = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > maxValue)
+                {
+                    maxValue = array[i];
+                }
+            }
+            return maxValue;
+        }
+
+        /// <summary>
+        /// Gets a specified digit from a given value.
+        /// </summary>
+        /// <param name="value">The value of the target number.</param>
+        /// <param name="degree">The place of the digit desired. 0 is 10^0, or ones place. 1 is 10^1, or tens place.</param>
+        /// <returns></returns>
+        private int getDigit(int value, int degree)
+        {
+            for (int i = 0; i < degree; i++)
+            {
+                value /= 10;
+            }
+            return value % 10;
+        }
+
+        /// <summary>
+        /// Swaps the values at two indexes in <c>array</c>.
+        /// </summary>
+        /// <param name="i">The first index.</param>
+        /// <param name="j">The second index.</param>
         private void swap(int i, int j)
         {
             int tmp = array[i];

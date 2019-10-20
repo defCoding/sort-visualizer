@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button btnRadixSort;
             this.picBoxVisualizer = new System.Windows.Forms.PictureBox();
             this.btnQuickSort = new System.Windows.Forms.Button();
             this.btnInsertionSort = new System.Windows.Forms.Button();
             this.grpBoxSortingAlgos = new System.Windows.Forms.GroupBox();
+            this.btnSelectionSort = new System.Windows.Forms.Button();
+            this.btnBubbleSort = new System.Windows.Forms.Button();
+            this.btnMergeSort = new System.Windows.Forms.Button();
             this.grpBoxArraySetup = new System.Windows.Forms.GroupBox();
             this.tkBarAnimationSpeed = new System.Windows.Forms.TrackBar();
             this.lblAnimationSpeed = new System.Windows.Forms.Label();
@@ -45,14 +49,22 @@
             this.lblArrayRange = new System.Windows.Forms.Label();
             this.lblArraySize = new System.Windows.Forms.Label();
             this.txtBoxArraySize = new System.Windows.Forms.TextBox();
-            this.btnMergeSort = new System.Windows.Forms.Button();
-            this.btnBubbleSort = new System.Windows.Forms.Button();
-            this.btnSelectionSort = new System.Windows.Forms.Button();
+            btnRadixSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxVisualizer)).BeginInit();
             this.grpBoxSortingAlgos.SuspendLayout();
             this.grpBoxArraySetup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tkBarAnimationSpeed)).BeginInit();
             this.SuspendLayout();
+            // 
+            // btnRadixSort
+            // 
+            btnRadixSort.Location = new System.Drawing.Point(179, 78);
+            btnRadixSort.Name = "btnRadixSort";
+            btnRadixSort.Size = new System.Drawing.Size(139, 23);
+            btnRadixSort.TabIndex = 6;
+            btnRadixSort.Text = "MSD Radix Sort";
+            btnRadixSort.UseVisualStyleBackColor = true;
+            btnRadixSort.Click += new System.EventHandler(this.btnRadixSort_Click);
             // 
             // picBoxVisualizer
             // 
@@ -87,6 +99,7 @@
             // 
             // grpBoxSortingAlgos
             // 
+            this.grpBoxSortingAlgos.Controls.Add(btnRadixSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnSelectionSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnBubbleSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnMergeSort);
@@ -98,6 +111,36 @@
             this.grpBoxSortingAlgos.TabIndex = 2;
             this.grpBoxSortingAlgos.TabStop = false;
             this.grpBoxSortingAlgos.Text = "Sorting Algorithms";
+            // 
+            // btnSelectionSort
+            // 
+            this.btnSelectionSort.Location = new System.Drawing.Point(6, 78);
+            this.btnSelectionSort.Name = "btnSelectionSort";
+            this.btnSelectionSort.Size = new System.Drawing.Size(139, 23);
+            this.btnSelectionSort.TabIndex = 3;
+            this.btnSelectionSort.Text = "Selection Sort";
+            this.btnSelectionSort.UseVisualStyleBackColor = true;
+            this.btnSelectionSort.Click += new System.EventHandler(this.btnSelectionSort_Click);
+            // 
+            // btnBubbleSort
+            // 
+            this.btnBubbleSort.Location = new System.Drawing.Point(6, 49);
+            this.btnBubbleSort.Name = "btnBubbleSort";
+            this.btnBubbleSort.Size = new System.Drawing.Size(139, 23);
+            this.btnBubbleSort.TabIndex = 2;
+            this.btnBubbleSort.Text = "Bubble Sort";
+            this.btnBubbleSort.UseVisualStyleBackColor = true;
+            this.btnBubbleSort.Click += new System.EventHandler(this.btnBubbleSort_Click);
+            // 
+            // btnMergeSort
+            // 
+            this.btnMergeSort.Location = new System.Drawing.Point(179, 19);
+            this.btnMergeSort.Name = "btnMergeSort";
+            this.btnMergeSort.Size = new System.Drawing.Size(139, 23);
+            this.btnMergeSort.TabIndex = 4;
+            this.btnMergeSort.Text = "Merge Sort";
+            this.btnMergeSort.UseVisualStyleBackColor = true;
+            this.btnMergeSort.Click += new System.EventHandler(this.btnMergeSort_Click);
             // 
             // grpBoxArraySetup
             // 
@@ -233,40 +276,11 @@
             this.txtBoxArraySize.TabIndex = 0;
             this.txtBoxArraySize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxArraySize_KeyPress);
             // 
-            // btnMergeSort
-            // 
-            this.btnMergeSort.Location = new System.Drawing.Point(179, 19);
-            this.btnMergeSort.Name = "btnMergeSort";
-            this.btnMergeSort.Size = new System.Drawing.Size(139, 23);
-            this.btnMergeSort.TabIndex = 4;
-            this.btnMergeSort.Text = "Merge Sort";
-            this.btnMergeSort.UseVisualStyleBackColor = true;
-            this.btnMergeSort.Click += new System.EventHandler(this.btnMergeSort_Click);
-            // 
-            // btnBubbleSort
-            // 
-            this.btnBubbleSort.Location = new System.Drawing.Point(6, 49);
-            this.btnBubbleSort.Name = "btnBubbleSort";
-            this.btnBubbleSort.Size = new System.Drawing.Size(139, 23);
-            this.btnBubbleSort.TabIndex = 2;
-            this.btnBubbleSort.Text = "Bubble Sort";
-            this.btnBubbleSort.UseVisualStyleBackColor = true;
-            this.btnBubbleSort.Click += new System.EventHandler(this.btnBubbleSort_Click);
-            // 
-            // btnSelectionSort
-            // 
-            this.btnSelectionSort.Location = new System.Drawing.Point(6, 78);
-            this.btnSelectionSort.Name = "btnSelectionSort";
-            this.btnSelectionSort.Size = new System.Drawing.Size(139, 23);
-            this.btnSelectionSort.TabIndex = 3;
-            this.btnSelectionSort.Text = "Selection Sort";
-            this.btnSelectionSort.UseVisualStyleBackColor = true;
-            this.btnSelectionSort.Click += new System.EventHandler(this.btnSelectionSort_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(954, 521);
             this.Controls.Add(this.grpBoxArraySetup);
             this.Controls.Add(this.grpBoxSortingAlgos);
