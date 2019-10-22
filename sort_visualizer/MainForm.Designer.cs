@@ -49,6 +49,7 @@
             this.lblArrayRange = new System.Windows.Forms.Label();
             this.lblArraySize = new System.Windows.Forms.Label();
             this.txtBoxArraySize = new System.Windows.Forms.TextBox();
+            this.btnHeapSort = new System.Windows.Forms.Button();
             btnRadixSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxVisualizer)).BeginInit();
             this.grpBoxSortingAlgos.SuspendLayout();
@@ -99,6 +100,7 @@
             // 
             // grpBoxSortingAlgos
             // 
+            this.grpBoxSortingAlgos.Controls.Add(this.btnHeapSort);
             this.grpBoxSortingAlgos.Controls.Add(btnRadixSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnSelectionSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnBubbleSort);
@@ -276,6 +278,16 @@
             this.txtBoxArraySize.TabIndex = 0;
             this.txtBoxArraySize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxArraySize_KeyPress);
             // 
+            // btnHeapSort
+            // 
+            this.btnHeapSort.Location = new System.Drawing.Point(179, 107);
+            this.btnHeapSort.Name = "btnHeapSort";
+            this.btnHeapSort.Size = new System.Drawing.Size(139, 23);
+            this.btnHeapSort.TabIndex = 7;
+            this.btnHeapSort.Text = "Heap Sort";
+            this.btnHeapSort.UseVisualStyleBackColor = true;
+            this.btnHeapSort.Click += new System.EventHandler(this.btnHeapSort_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,6 +332,7 @@
         private System.Windows.Forms.Button btnMergeSort;
         private System.Windows.Forms.Button btnBubbleSort;
         private System.Windows.Forms.Button btnSelectionSort;
+        private System.Windows.Forms.Button btnHeapSort;
     }
 }
 

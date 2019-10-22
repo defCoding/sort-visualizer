@@ -42,7 +42,8 @@ namespace sort_visualizer
             Selection,
             Quick,
             Merge,
-            Radix
+            Radix,
+            Heap
         }
         public MainForm()
         {
@@ -180,6 +181,9 @@ namespace sort_visualizer
                             case Sorts.Radix:
                                 sorterModel.radixSort();
                                 break;
+                            case Sorts.Heap:
+                                sorterModel.heapSort();
+                                break;
                             default:
                                 break; // Should never get here.
                         }
@@ -221,6 +225,11 @@ namespace sort_visualizer
         private void btnRadixSort_Click(object sender, EventArgs e)
         {
             runSort(Sorts.Radix);
+        }
+
+        private void btnHeapSort_Click(object sender, EventArgs e)
+        {
+            runSort(Sorts.Heap);
         }
 
         /// <summary>

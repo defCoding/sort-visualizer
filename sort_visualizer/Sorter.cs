@@ -335,6 +335,53 @@ namespace sort_visualizer
             return value % 10;
         }
 
+        public void heapSort()
+        {
+            heapify();
+            for (int i = 0; i < array.Length; i++)
+            {
+                removeMax(array.Length - 1 - i);
+            }
+        }
+
+        private void heapify()
+        {
+            for (int i = array.Length / 2; i >= 0; i--)
+            {
+                siftDown(i, array.Length - 1);
+            }
+        }
+
+        private void removeMax(int end)
+        {
+            OnArrayModified(0, end);
+            swap(0, end);
+            siftDown(0, end - 1);
+        }
+
+        private void siftDown(int index, int end)
+        {
+            if (index < end)
+            {
+                int maxChildIndex = getMaxChildIndex(index, end);
+                if (maxChildIndex != -1 && array[index] < array[maxChildIndex])
+                {
+                    OnArrayModified(index, maxChildIndex);
+                    swap(index, maxChildIndex);
+                    siftDown(maxChildIndex, end);
+                }
+            }
+
+        }
+
+        private int getMaxChildIndex(int index, int end)
+        {
+            int child1Index = 2 * index > end ? -1 : 2 * index;
+            int child2Index = 2 * index + 1 > end ? -1 : 2 * index + 1;
+
+            return (child1Index == -1 || child2Index == -1 || array[child1Index] > array[child2Index]) ? child1Index : child2Index;
+        }
+
         /// <summary>
         /// Swaps the values at two indexes in <c>array</c>.
         /// </summary>
