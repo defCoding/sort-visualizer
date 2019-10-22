@@ -281,7 +281,6 @@ namespace sort_visualizer
                 radixSortHelper(i, j - 1, degree - 1);
                 i = j;
             }
-
         }
 
         /// <summary>
@@ -333,6 +332,43 @@ namespace sort_visualizer
                 value /= 10;
             }
             return value % 10;
+        }
+
+        public void countingSort()
+        {
+            int i;
+            int maxVal = findMaxValue();
+            int[] count = new int[maxVal + 1];
+            for (i = 0; i < array.Length; i++)
+            {
+                OnArrayModified(i, i);
+                count[array[i]]++;
+            }
+
+            for (i = 1; i < count.Length; i++)
+            {
+                count[i] += count[i - 1];
+            }
+
+            i = 0;
+            while (i < array.Length)
+            {
+                int boundaryStart = array[i] == 0 ? -1 : count[array[i] - 1];
+
+                if (i < boundaryStart)
+                {
+                    OnArrayModified(i, count[array[i]] - 1);
+                    int temp = array[i];
+                    swap(i, count[array[i]] - 1);
+                    count[temp]--;
+                } else
+                {
+                    OnArrayModified(i, i);
+                    i++;
+                }
+            }
+
+            OnArrayModified(0, 0);
         }
 
         public void heapSort()

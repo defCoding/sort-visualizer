@@ -50,6 +50,7 @@
             this.lblArraySize = new System.Windows.Forms.Label();
             this.txtBoxArraySize = new System.Windows.Forms.TextBox();
             this.btnHeapSort = new System.Windows.Forms.Button();
+            this.btnCountingSort = new System.Windows.Forms.Button();
             btnRadixSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxVisualizer)).BeginInit();
             this.grpBoxSortingAlgos.SuspendLayout();
@@ -100,6 +101,7 @@
             // 
             // grpBoxSortingAlgos
             // 
+            this.grpBoxSortingAlgos.Controls.Add(this.btnCountingSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnHeapSort);
             this.grpBoxSortingAlgos.Controls.Add(btnRadixSort);
             this.grpBoxSortingAlgos.Controls.Add(this.btnSelectionSort);
@@ -280,13 +282,23 @@
             // 
             // btnHeapSort
             // 
-            this.btnHeapSort.Location = new System.Drawing.Point(179, 107);
+            this.btnHeapSort.Location = new System.Drawing.Point(179, 136);
             this.btnHeapSort.Name = "btnHeapSort";
             this.btnHeapSort.Size = new System.Drawing.Size(139, 23);
-            this.btnHeapSort.TabIndex = 7;
+            this.btnHeapSort.TabIndex = 8;
             this.btnHeapSort.Text = "Heap Sort";
             this.btnHeapSort.UseVisualStyleBackColor = true;
             this.btnHeapSort.Click += new System.EventHandler(this.btnHeapSort_Click);
+            // 
+            // btnCountingSort
+            // 
+            this.btnCountingSort.Location = new System.Drawing.Point(179, 107);
+            this.btnCountingSort.Name = "btnCountingSort";
+            this.btnCountingSort.Size = new System.Drawing.Size(139, 23);
+            this.btnCountingSort.TabIndex = 7;
+            this.btnCountingSort.Text = "Counting Sort";
+            this.btnCountingSort.UseVisualStyleBackColor = true;
+            this.btnCountingSort.Click += new System.EventHandler(this.btnCountingSort_Click);
             // 
             // MainForm
             // 
@@ -333,6 +345,7 @@
         private System.Windows.Forms.Button btnBubbleSort;
         private System.Windows.Forms.Button btnSelectionSort;
         private System.Windows.Forms.Button btnHeapSort;
+        private System.Windows.Forms.Button btnCountingSort;
     }
 }
 

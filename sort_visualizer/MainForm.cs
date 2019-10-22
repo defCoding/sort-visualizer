@@ -43,6 +43,7 @@ namespace sort_visualizer
             Quick,
             Merge,
             Radix,
+            Counting,
             Heap
         }
         public MainForm()
@@ -181,6 +182,9 @@ namespace sort_visualizer
                             case Sorts.Radix:
                                 sorterModel.radixSort();
                                 break;
+                            case Sorts.Counting:
+                                sorterModel.countingSort();
+                                break;
                             case Sorts.Heap:
                                 sorterModel.heapSort();
                                 break;
@@ -230,6 +234,11 @@ namespace sort_visualizer
         private void btnHeapSort_Click(object sender, EventArgs e)
         {
             runSort(Sorts.Heap);
+        }
+
+        private void btnCountingSort_Click(object sender, EventArgs e)
+        {
+            runSort(Sorts.Counting);
         }
 
         /// <summary>
