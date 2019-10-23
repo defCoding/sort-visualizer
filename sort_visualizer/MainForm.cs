@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
-using System.Threading;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace sort_visualizer
 {
@@ -35,6 +30,8 @@ namespace sort_visualizer
         private object queueLock;
         private bool resettingSort;
         private int defaultArraySize, defaultRangeMin, defaultRangeMax, maxSize, lowerBound, upperBound, timerInterval;
+        private bool mouseDown;
+        private Point mouseDownLocation;
         private enum Sorts
         {
             Insertion,
@@ -65,9 +62,9 @@ namespace sort_visualizer
             defaultArraySize = 50;
             defaultRangeMin = 50;
             defaultRangeMax = 200;
-            maxSize = picBoxVisualizer.Width;
+            maxSize = 500;
             lowerBound = 0;
-            upperBound = picBoxVisualizer.Height;
+            upperBound = picBoxVisualizer.Height / 50 * 50;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -106,19 +103,19 @@ namespace sort_visualizer
                     Graphics visualizerGraphics = Graphics.FromImage(currentImage);
                     visualizerGraphics.Clear(Color.Empty);
                     int canvasWidth = currentImage.Width;
-                    float barWidth = Math.Max(1, (float) canvasWidth / arrayToDraw.Length);
-                    float offset = (canvasWidth - arrayToDraw.Length * barWidth) / 2;
+                    float barWidth = (float) canvasWidth / arrayToDraw.Length;
+                    float offset = (canvasWidth - arrayToDraw.Length * barWidth) / 2; // Centers the bars in the middle of the visualizer
 
                     Pen pen = new Pen(Color.White, barWidth);
                     for (int i = 0; i < arrayToDraw.Length; i++)
                     {
                         if (i == arrayArgs.currIndex)
                         {
-                            pen.Color = Color.Red;
+                            pen.Color = Color.FromArgb(236, 78, 79);
                         }
                         else if (i == arrayArgs.checkedIndex)
                         {
-                            pen.Color = Color.Green;
+                            pen.Color = Color.FromArgb(39, 185, 152);
                         }
                         else
                         {
@@ -242,6 +239,57 @@ namespace sort_visualizer
         }
 
         /// <summary>
+        /// Registers a mouse down if the mouse was clicked on the top part of the window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Location.Y < picBoxVisualizer.Location.Y)
+            {
+                mouseDown = true;
+                mouseDownLocation = e.Location;
+            }
+        }
+
+        /// <summary>
+        /// Moves the window with the mouse if the mouse was clicked down properly.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point((this.Location.X - mouseDownLocation.X) + e.X, (this.Location.Y - mouseDownLocation.Y) + e.Y);
+                this.Update();
+            }
+        }
+
+        /// <summary>
+        /// Sets <c>mouseDown</c> to false when the user releases the mouse.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            btnDummy.Focus();
+            this.Close();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            btnDummy.Focus();
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+
+        /// <summary>
         /// Removes all images from <c>animationQueue</c> and resets the array. Will wait for sorting to finish before doing so, and
         /// will stop sorting while it is resetting. Only one reset will be run at a time.
         /// </summary>
@@ -316,12 +364,12 @@ namespace sort_visualizer
             }
 
             // Show all needed error messages.
-            lblArrayError.Text = "Max Value: " + maxSize;
+            lblArrayError.Text = "Max Size is " + maxSize;
             lblArrayError.Visible = arraySize > maxSize;
             
             if (rangeMin >= rangeMax)
             {
-                lblRangeError.Text = "Min must be less than Max.";
+                lblRangeError.Text = "Min < Max.";
                 lblRangeError.Visible = true;
             } else if (rangeMin == -1 ^ rangeMax == -1 || (rangeMin < lowerBound || rangeMax > upperBound))
             {
