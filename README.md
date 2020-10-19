@@ -7,5 +7,8 @@ This was one of the most fun projects I've ever undertook. It was something I wa
 
 After taking a course on C# Windows Applications, I decided to try using C# and Visual Studio to build the application. I ran into the same issues with the main thread being locked up, but at this point, I was comfortable enough to try multithreading, and running the sorting visualization on a separate thread, which worked! I did have some issues with the program taking up significant amounts oF RAM, but I was able to fix that by shrinking the size of the data required to draw each frame of the sorting visualization.
 
+## How to Run
+Unfortunately, my license for Visual Studio has expired, and I did not push the release `.exe` file to the repository. To run the program, open the project in Visual Studio, and then build the program. I will update this to contain the `.exe` when I can.
+
 ## Preview
 ![Preview](https://i.imgur.com/6im9BDR.gif)
